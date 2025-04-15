@@ -1,0 +1,48 @@
+name: MY-NIX (ARM64)
+
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04-arm  # ARM runner provided by GitHub
+
+    steps:
+      - name: Free up disk space on GitHub Runner
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: false
+          # android: false
+          # dotnet: false
+          # haskell: false
+          # large-packages: false
+          # swap-storage: false
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker image (ARM64)
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/arm64
+          tags: ptrsr/my-nix:latest
+          load: true
+
+      - name: Create dist folder
+        run: mkdir -p "${{ github.workspace }}/dist"
+
+      - name: Run Docker container with mounted volume
+        run: |
+          docker run --rm -v "${{ github.workspace }}/dist:/dist" -v "${{ github.workspace }}/src:/src" ptrsr/my-nix:latest
+
+      - name: Upload artifact to GitHub
+        uses: actions/upload-artifact@v4
+        with:
+          name: distro
+          path: dist/distro.img.zst
