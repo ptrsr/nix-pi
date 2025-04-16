@@ -4,7 +4,8 @@ set -e
 
 # Build NixOS system
 echo "Building NixOS system for Raspberry Pi 5..."
-cd /src && nix build .#packages.aarch64-linux.default  --refresh
+cd /src && nix build ./targets/pi#image
+
 
 # Copy distro image to distribution folder
 IMAGE_NAME="nixos-sd-image-rpi5-kernelboot.img.zst"
