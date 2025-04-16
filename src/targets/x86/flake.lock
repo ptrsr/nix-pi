@@ -1,5 +1,17 @@
 {
   "nodes": {
+    "common": {
+      "flake": false,
+      "locked": {
+        "path": "./common",
+        "type": "path"
+      },
+      "original": {
+        "path": "./common",
+        "type": "path"
+      },
+      "parent": []
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1735563628,
@@ -18,6 +30,7 @@
     },
     "root": {
       "inputs": {
+        "common": "common",
         "nixpkgs": "nixpkgs"
       }
     }

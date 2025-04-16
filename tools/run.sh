@@ -10,8 +10,8 @@ mkdir -p "$DIST_DIR"
 
 # Run the container with all necessary mounts
 docker run -it \
+    -e TARGET=pi \
     -v $DIST_DIR:/dist \
     -v $SRC_DIR:/src \
     -w /build \
-    --entrypoint bash \
     $DOCKER_IMAGE_NAME "$@"

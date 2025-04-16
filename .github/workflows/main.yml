@@ -22,10 +22,10 @@ jobs:
     runs-on: ${{ matrix.runner }}
 
     steps:
-      - name: Free up disk space
-        uses: jlumbroso/free-disk-space@main
-        with:
-          tool-cache: false
+      # - name: Free up disk space
+      #   uses: jlumbroso/free-disk-space@main
+      #   with:
+      #     tool-cache: false
 
       - name: Checkout
         uses: actions/checkout@v4
@@ -39,7 +39,7 @@ jobs:
           context: .
           platforms: ${{ matrix.platform }}
           tags: ptrsr/my-nix:${{ matrix.arch }}
-          load: true           # load into local Docker daemon
+          load: true
 
       - name: Create dist folder
         run: mkdir -p "$GITHUB_WORKSPACE/dist"

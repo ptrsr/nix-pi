@@ -7,4 +7,4 @@ WORKDIR /build
 ENV NIX_CONFIG='experimental-features = nix-command flakes'
 
 # Set the entry point
-ENTRYPOINT ["/src/build.sh"]
+ENTRYPOINT ["/src/entrypoint.sh"]
