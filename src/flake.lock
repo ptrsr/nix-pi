@@ -22,11 +22,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1744604434,
-        "narHash": "sha256-ZtXav00h2T0N0cR3X/5pOM9X0dBf7ESMxBUFK80zbNs=",
+        "lastModified": 1744760965,
+        "narHash": "sha256-U6W7accGi6egFfAzVdDsEU9isjN0h4WxgGpKYHKoeM4=",
         "owner": "nvmd",
         "repo": "nixos-raspberrypi",
-        "rev": "65c0618bc3cc45189c0d0c17a07b66843ea539f2",
+        "rev": "423e8fc1ed409ee5f94c118fe6ba61136b30f18f",
         "type": "github"
       },
       "original": {
@@ -53,11 +53,7 @@
     },
     "root": {
       "inputs": {
-        "nixos-raspberrypi": "nixos-raspberrypi",
-        "nixpkgs": [
-          "nixos-raspberrypi",
-          "nixpkgs"
-        ]
+        "nixos-raspberrypi": "nixos-raspberrypi"
       }
     }
   },

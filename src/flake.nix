@@ -1,17 +1,17 @@
 {
   inputs.nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi";
-  inputs.nixpkgs.follows = "nixos-raspberrypi/nixpkgs";
 
-  outputs = { self, nixpkgs, nixos-raspberrypi }: {
-    nixosConfigurations.rpi5 = nixpkgs.lib.nixosSystem {
-      system = "aarch64-linux";
+  outputs = inputs@{ self, nixos-raspberrypi, ... }: {
+    nixosConfigurations.rpi5 = nixos-raspberrypi.lib.nixosSystem {
+      specialArgs = inputs;
+
       modules = [
-        nixos-raspberrypi.nixosModules.raspberry-pi-5.base
-        nixos-raspberrypi.nixosModules.sd-image
-        nixos-raspberrypi.nixosModules.nixpkgs-rpi
-        nixos-raspberrypi.lib.inject-overlays
-        nixos-raspberrypi.nixosModules.trusted-nix-caches # optional, recommended
-        ./configuration.nix
+        { imports = with nixos-raspberrypi.nixosModules; [
+            raspberry-pi-5.base
+            sd-image
+          ];
+        }
+
         ({ pkgs, ... }: {
           environment.systemPackages = with pkgs; [
             raspberrypi-utils
@@ -20,6 +20,8 @@
             raspberrypiWirelessFirmware
           ];
         })
+
+        ./configuration.nix
       ];
     };
 
