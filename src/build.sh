@@ -1,14 +1,10 @@
 #!/bin/sh
 set -e
 
+TARGET="${TARGET:-pi}"
 
-# Build NixOS system
-echo "Building NixOS system for Raspberry Pi 5..."
-cd /src && nix build ./targets/pi#image
+echo "Building NixOS system for target '${TARGET}'..."
+cd /src && nix build ./targets/${TARGET}#image
 
-
-# Copy distro image to distribution folder
-IMAGE_NAME="nixos-sd-image-rpi5-kernelboot.img.zst"
-RESULT_IMAGE="$(readlink -f /src/result)/sd-image/$IMAGE_NAME"
-
-cp "$RESULT_IMAGE" /dist/distro.img.zst
+IMG="$(readlink -f /src/result)/sd-image"/*.img.zst
+cp "$IMG" "/dist/distro-${TARGET}.img.zst"

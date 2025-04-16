@@ -1,5 +1,5 @@
 {
-  description = "x86-64 SD image";
+  description = "Raspberry Pi SD image";
 
   inputs.nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi";
 
