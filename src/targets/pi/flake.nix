@@ -1,7 +1,7 @@
 {
-  inputs = {
-    nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi";
-  };
+  description = "x86-64 SD image";
+
+  inputs.nixos-raspberrypi.url = "github:nvmd/nixos-raspberrypi";
 
   outputs = inputs@{ self, nixos-raspberrypi, ... }: {
     nixosConfigurations.rpi5 = nixos-raspberrypi.lib.nixosSystem {
@@ -23,9 +23,6 @@
       ];
     };
 
-    packages.aarch64-linux = rec {
-      image = self.nixosConfigurations.rpi5.config.system.build.sdImage;
-      default = image;
-    };
+    image = self.nixosConfigurations.rpi5.config.system.build.sdImage;
   };
 }
