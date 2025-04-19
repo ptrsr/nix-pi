@@ -4,7 +4,7 @@ set -e
 TARGET="${TARGET:-pi}"
 
 echo "Copying flake and lock..."
-cp -f "/src/targets/${TARGET}/flake."{nix,lock}  "/src/"
+# cp -f "/src/targets/${TARGET}/flake."{nix,lock}  "/src/"
 
 echo "Building NixOS system for target '${TARGET}'..."
 cd /src && nix build .#image
